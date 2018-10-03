@@ -2,13 +2,14 @@ package com.example.dima.myapplication;
 
 public class User
 {
-    private String userName, userPassword, userMail;
+    private String userName, userPassword, userMail, userType;
 
-    public User(String userName, String userMail, String userPassword)
+    public User(String userName, String userMail, String userPassword, String userType)
     {
         setUserName(userName);
         setUserPassword(userPassword);
         setUserMail(userMail);
+        setUserType(userType);
     }
 
     public String getUserName()
@@ -41,5 +42,13 @@ public class User
         this.userMail = userMail;
     }
 
+    public String getUsersType()
+    {
+        return this.userType;
+    }
 
+    public void setUserType(String userType)
+    {
+        this.userType = userType;
+    }
 }

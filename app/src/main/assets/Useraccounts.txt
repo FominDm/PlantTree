@@ -1,2 +1,2 @@
-Dima dmytro.fomin@gmail.com 12345
-Maria maria.g.fomin@gamil.com 54321
+Dima dmytro.fomin@gmail.com 12345 0
+Maria maria.g.fomin@gamil.com 54321 1

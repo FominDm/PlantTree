@@ -30,6 +30,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ShoppingCartActivity"
+            android:label="Shopping Cart">
+            <intent-filter>
+                <action android:name=".ShoppingCartActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

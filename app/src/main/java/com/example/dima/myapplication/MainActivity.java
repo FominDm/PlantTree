@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }else
                 {
-                    String userName, userMail, userPassword;
+                    String userName, userMail, userPassword, userType;
                     User user;
 
                     String tokenizedLine[] = line.split(" ");
@@ -133,8 +133,9 @@ public class MainActivity extends AppCompatActivity {
                     userName = tokenizedLine[0];
                     userMail = tokenizedLine[1];
                     userPassword = tokenizedLine[2];
+                    userType = tokenizedLine[3];
 
-                    user = new User(userName, userMail, userPassword);
+                    user = new User(userName, userMail, userPassword, userType);
 
                     userList.add(user);
                 }
