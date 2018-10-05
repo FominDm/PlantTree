@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -16,13 +18,16 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton cartButton, loginButton;
-    private TextView loginTextView, Desc1, Desc2;
+    private Button shopOnline;
+    private TextView loginTextView;
+    private ListView specialsListView;
     private String userFilePath = "Useraccounts.txt";
     private String productFilePath = "Productlist.txt";
 
     private ArrayList<User> userList;
-    private ArrayList<Product> productList;
+    public static ArrayList<Product> productList;
     private User currentUser;
+    public static ArrayList<Product> shoppingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,14 +35,19 @@ public class MainActivity extends AppCompatActivity {
         currentUser = null;
         userList = new ArrayList<>();
         productList = new ArrayList<>();
+        shoppingCart = new ArrayList<>();
         LoadData();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ListnerOnButton();
-        SetTExts();
+        SetTexts();
+
+        specialsListView = findViewById(R.id.ListView);
+        ProductSpecialsAdapter adapter = new ProductSpecialsAdapter(this, productList);
+        specialsListView.setAdapter(adapter);
     }
 
-    public void SetTExts()
+    public void SetTexts()
     {
         loginTextView = findViewById(R.id.LoginViewField);
         if(currentUser == null)
@@ -50,11 +60,11 @@ public class MainActivity extends AppCompatActivity {
             loginTextView.setText(res);
         }
 
-        Desc1 = findViewById(R.id.Desc_1);
-        Desc1.setText(productList.get(0).getDescription());
+    }
 
-        Desc2 = findViewById(R.id.Desc_2);
-        Desc2.setText(productList.get(2).getDescription());
+    public void AddToCart()
+    {
+
     }
 
     public void ListnerOnButton()
@@ -63,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(".ShoppingCartActivity");
+                startActivity(intent);
             }
         });
 
@@ -84,7 +95,15 @@ public class MainActivity extends AppCompatActivity {
                 intent.putStringArrayListExtra("emails", emails);
                 intent.putStringArrayListExtra("passwords", passwords);
                 startActivityForResult(intent, 0);
-                //startActivity(intent);
+            }
+        });
+
+        shopOnline = findViewById(R.id.ShopCatalog);
+        shopOnline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(".ShopOnline");
+                startActivity(intent);
             }
         });
 
@@ -192,11 +211,13 @@ public class MainActivity extends AppCompatActivity {
                     if(user.getUserMail().toString().toLowerCase().equals(returnString))
                     {
                         currentUser = user;
-                        SetTExts();
+                        SetTexts();
                         break;
                     }
                 }
             }
         }
     }
+
+
 }

@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View v) {
-
                 if(checkEmail())
                 {
                     if(TryLogIn())
@@ -64,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     Toast.makeText(LoginActivity.this,"Email you entered not valid!", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
