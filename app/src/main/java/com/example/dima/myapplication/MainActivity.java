@@ -24,10 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private String userFilePath = "Useraccounts.txt";
     private String productFilePath = "Productlist.txt";
 
-    private ArrayList<User> userList;
+    private static ArrayList<User> userList;
     public static ArrayList<Product> productList;
-    private User currentUser;
-    public static ArrayList<Product> shoppingCart;
+    private static User currentUser;
+    public static ShoppingCart shoppingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         currentUser = null;
         userList = new ArrayList<>();
         productList = new ArrayList<>();
-        shoppingCart = new ArrayList<>();
+        shoppingCart = new ShoppingCart();
         LoadData();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -59,11 +59,6 @@ public class MainActivity extends AppCompatActivity {
             res += currentUser.getUserName() +"!";
             loginTextView.setText(res);
         }
-
-    }
-
-    public void AddToCart()
-    {
 
     }
 
@@ -109,27 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-   /* public void SaveUsersToFile(String filePath)
-    {
-        try
-        {
-            OutputStream fos = openFileOutput(filePath, MODE_PRIVATE);
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-            String data = "";
-            for(User user:userList)
-            {
-                data += user.getUserName() + " ";
-                data += user.getUserMail() + " ";
-                data += user.getUserPassword() + " \n";
-            }
-            bw.write(data);
-            bw.close();
-            fos.close();
-        }catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }*/
 
     public void LoadData()
     {

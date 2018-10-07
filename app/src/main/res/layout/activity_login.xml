@@ -34,14 +34,14 @@
 
     <ImageButton
         android:id="@+id/HomeButton"
-        android:layout_width="56dp"
-        android:layout_height="53dp"
+        android:layout_width="75dp"
+        android:layout_height="66dp"
         android:layout_marginLeft="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?attr/homeAsUpIndicator" />
+        app:srcCompat="@mipmap/home_cart_round" />
 
     <EditText
         android:id="@+id/PaswordField"

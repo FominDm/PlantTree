@@ -72,7 +72,7 @@ public class ProductSpecialsAdapter extends BaseAdapter
             @Override
             public void onClick(View v)
             {
-                MainActivity.shoppingCart.add(product);
+                MainActivity.shoppingCart.addItem(product, 1);
             }
         });
         return view;
