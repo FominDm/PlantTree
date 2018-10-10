@@ -1,6 +1,7 @@
 package com.example.dima.myapplication;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -52,7 +53,21 @@ public class ProductAdapter extends BaseAdapter
             view = li.inflate(R.layout.shop_view_list, parent, false);
         }
 
-        final Product product = getProduct(position);
+        Product product = getProduct(position);
+
+        boolean discounted = false;
+        String normalPrice = "";
+
+        for(Product prod: MainActivity.specialsList)
+        {
+            if(product.getName().equals(prod.getName()))
+            {
+                discounted = true;
+                normalPrice = product.getPrice();
+                product = prod;
+            }
+        }
+        final Product productToAdd = product;
 
         TextView name = view.findViewById(R.id.Name);
         name.setText(product.getName());
@@ -61,16 +76,22 @@ public class ProductAdapter extends BaseAdapter
         description.setText(product.getDescription());
 
         TextView price = view.findViewById(R.id.Price);
-        price.setText("$" + product.getPrice());
-
-        // TODO: 7/10/2018
-        //Create specials list and check if product in this list
-        //set visibility to true
         TextView discountPrice = view.findViewById(R.id.DiscountPrice);
-        if(true)
+
+        if(discounted)
+        {
+            price.setText("$" + normalPrice);
+            price.setPaintFlags(price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            discountPrice.setText("$ " + product.getPrice());
             discountPrice.setVisibility(View.VISIBLE);
+        }else
+        {
+            price.setText("$" + product.getPrice());
+            discountPrice.setVisibility(View.INVISIBLE);
+        }
 
         EditText quantity = view.findViewById(R.id.Quantity);
+        quant = 1;
         quantity.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
@@ -103,7 +124,7 @@ public class ProductAdapter extends BaseAdapter
             @Override
             public void onClick(View v)
             {
-                MainActivity.shoppingCart.addItem(product, quant);
+                MainActivity.shoppingCart.addItem(productToAdd, quant);
             }
         });
         return view;

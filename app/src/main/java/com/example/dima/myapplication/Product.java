@@ -7,6 +7,11 @@ public class Product
     private String category;
     private String price;
 
+    public Product()
+    {
+
+    }
+
     public Product(String name, String description, String category, String price)
     {
         setName(name);

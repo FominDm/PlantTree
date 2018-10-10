@@ -23,9 +23,11 @@ public class MainActivity extends AppCompatActivity {
     private ListView specialsListView;
     private String userFilePath = "Useraccounts.txt";
     private String productFilePath = "Productlist.txt";
+    private String specialsFilePath = "Specials.txt";
 
     private static ArrayList<User> userList;
     public static ArrayList<Product> productList;
+    public static ArrayList<Product> specialsList;
     private static User currentUser;
     public static ShoppingCart shoppingCart;
 
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         userList = new ArrayList<>();
         productList = new ArrayList<>();
         shoppingCart = new ShoppingCart();
+        specialsList = new ArrayList<>();
         LoadData();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         SetTexts();
 
         specialsListView = findViewById(R.id.ListView);
-        ProductSpecialsAdapter adapter = new ProductSpecialsAdapter(this, productList);
+        ProductSpecialsAdapter adapter = new ProductSpecialsAdapter(this, specialsList);
         specialsListView.setAdapter(adapter);
     }
 
@@ -166,6 +169,45 @@ public class MainActivity extends AppCompatActivity {
             br.close();
             is.close();
         }catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        try{
+            InputStream is = getAssets().open(specialsFilePath);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            while(true)
+            {
+                String line = br.readLine();
+                if(line == null)
+                {
+                    break;
+                }else
+                {
+                    String name, price;
+                    String tokenLine[] = line.split("/;");
+
+                    name = tokenLine[0].trim();
+                    price = tokenLine[1].trim();
+
+                    for(Product product: productList)
+                    {
+                        if(name.equals(product.getName()))
+                        {
+                            Product newProduct = new Product();
+                            newProduct.setName(name);
+                            newProduct.setCategory(product.getCategory());
+                            newProduct.setDescription(product.getDescription());
+                            newProduct.setPrice(price);
+                            specialsList.add(newProduct);
+                            break;
+                        }
+                    }
+                }
+            }
+            br.close();
+            is.close();
+        }catch (IOException e)
         {
             e.printStackTrace();
         }

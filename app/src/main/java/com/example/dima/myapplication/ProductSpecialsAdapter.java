@@ -60,11 +60,18 @@ public class ProductSpecialsAdapter extends BaseAdapter
         description.setText(product.getDescription());
 
         TextView normalPrice = view.findViewById(R.id.NormalPrice);
-        normalPrice.setText("$ " + product.getPrice());
-        normalPrice.setPaintFlags(normalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        for(Product prod: MainActivity.productList)
+        {
+            if(prod.getName().equals(product.getName()))
+            {
+                normalPrice.setText("$ " + prod.getPrice());
+                normalPrice.setPaintFlags(normalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                break;
+            }
+        }
 
         TextView specialPrice = view.findViewById(R.id.SpecialPrice);
-        specialPrice.setText("$" + product.getPrice());
+        specialPrice.setText("$ " + product.getPrice());
 
         Button addToCart = view.findViewById(R.id.addToCart);
         addToCart.setOnClickListener(new View.OnClickListener()
