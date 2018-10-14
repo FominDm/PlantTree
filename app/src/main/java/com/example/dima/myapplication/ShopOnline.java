@@ -10,33 +10,36 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+
 public class ShopOnline extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private Spinner productCat;
     private ImageButton home, shoppingCart;
     private ListView productsView;
+    private ArrayList<Product> listToShow;
 
-    private String[] prodCat = {"All categories","trees", "Evergreen and Natives"};
+    private String[] prodCat = {"All categories","Fruit tree", "Evergreen and Natives"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_online);
 
+        listToShow = new ArrayList<>();
+
         buttons();
+
+        productsView = findViewById(R.id.ProductList);
 
         productCat = findViewById(R.id.ProductCat);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, prodCat);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         productCat.setAdapter(adapter);
         productCat.setOnItemSelectedListener(this);
-
-        productsView = findViewById(R.id.ProductList);
-        ProductAdapter productAdapter = new ProductAdapter(this, MainActivity.productList);
-        productsView.setAdapter(productAdapter);
-
     }
 
+    //on click listeners for home and shoppingCart buttons
     public void buttons()
     {
         home = findViewById(R.id.Home);
@@ -61,22 +64,51 @@ public class ShopOnline extends AppCompatActivity implements AdapterView.OnItemS
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
-        switch (position) {
+        switch (position)
+        {
             case 0:
-                // Whatever you want to happen when the first item gets selected
+                adaptProducts(position);
                 break;
             case 1:
-                // Whatever you want to happen when the second item gets selected
+                adaptProducts(position);
                 break;
             case 2:
-                // Whatever you want to happen when the thrid item gets selected
+                adaptProducts(position);
                 break;
-
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    //sorts products by category
+    private void ProductListSorter(ArrayList<Product> list, String sortingName)
+    {
+        listToShow.clear();
+        for(Product product: list)
+        {
+            if(sortingName.equals(prodCat[0]))
+            {
+                listToShow.add(product);
+            }else
+            {
+                if(product.getCategory().equals(sortingName))
+                {
+                    listToShow.add(product);
+                }
+            }
+        }
+    }
+
+    //adapts Product list depending on what product category was selected
+    private void adaptProducts(int position)
+    {
+        ProductAdapter productAdapter;
+
+        ProductListSorter(MainActivity.productList, prodCat[position]);
+        productAdapter = new ProductAdapter(this, listToShow);
+        productsView.setAdapter(productAdapter);
     }
 }

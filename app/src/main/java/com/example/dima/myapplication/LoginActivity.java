@@ -24,14 +24,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //sets emails array from extras
         emails = getIntent().getStringArrayListExtra("emails");
+        //sets passwords array from extras
         passwords = getIntent().getStringArrayListExtra("passwords");
+
         emailField = findViewById(R.id.EmailField);
         passwordField = findViewById(R.id.PaswordField);
-        ListnerOnButton();
+        ListenerOnButton();
     }
 
-    private void ListnerOnButton()
+    //Button click listeners
+    private void ListenerOnButton()
     {
         homeButton = findViewById(R.id.HomeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                 {
                     if(TryLogIn())
                     {
+                        //Returning email of logged in user back to main page
                         Intent i = new Intent();
                         i.putExtra(Intent.EXTRA_TEXT, passBack);
                         setResult(RESULT_OK, i);
@@ -67,10 +72,11 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //Checks if data form userEmail and userPassword fields
+    //match with UserAccounts.txt data
     private boolean TryLogIn()
     {
         boolean logIn = false;
-
 
         for(String email: emails)
         {
@@ -90,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         return logIn;
     }
 
+    //Checks if userEmail field contains '@' symbol
     private boolean checkEmail()
     {
         boolean res = false;

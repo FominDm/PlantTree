@@ -34,6 +34,14 @@ public class ShoppingCart
         }
     }
 
+    //delete all items in shopping cart
+    public void clearCart()
+    {
+        listOfItems.clear();
+        quantity.clear();
+    }
+
+    //removes specified product from shopping cart
     public void deleteItem(int position)
     {
         listOfItems.remove(position);

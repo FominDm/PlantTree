@@ -58,6 +58,8 @@ public class ProductAdapter extends BaseAdapter
         boolean discounted = false;
         String normalPrice = "";
 
+        //checks if current product on special
+        //and save normal price for this product
         for(Product prod: MainActivity.specialsList)
         {
             if(product.getName().equals(prod.getName()))
@@ -78,6 +80,8 @@ public class ProductAdapter extends BaseAdapter
         TextView price = view.findViewById(R.id.Price);
         TextView discountPrice = view.findViewById(R.id.DiscountPrice);
 
+        //set visibility for special price TextView if product on special
+        //and sets prices for normal and discounted price TextViews
         if(discounted)
         {
             price.setText("$" + normalPrice);
@@ -92,7 +96,10 @@ public class ProductAdapter extends BaseAdapter
 
         EditText quantity = view.findViewById(R.id.Quantity);
         quant = 1;
-        quantity.addTextChangedListener(new TextWatcher() {
+        //sets textChangeListener for quantity view
+        quantity.addTextChangedListener(new TextWatcher()
+        {
+            //sets quantity of product to 1 before text changing
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after)
             {
@@ -105,6 +112,7 @@ public class ProductAdapter extends BaseAdapter
 
             }
 
+            //sets quantity depending on users input
             @Override
             public void afterTextChanged(Editable s)
             {
@@ -119,6 +127,7 @@ public class ProductAdapter extends BaseAdapter
         });
 
         Button addToCart = view.findViewById(R.id.addToCart);
+        //on click listener for Add button
         addToCart.setOnClickListener(new View.OnClickListener()
         {
             @Override

@@ -23,7 +23,6 @@ public class ProductSpecialsAdapter extends BaseAdapter
 
     }
 
-
     @Override
     public int getCount()
     {
@@ -60,6 +59,8 @@ public class ProductSpecialsAdapter extends BaseAdapter
         description.setText(product.getDescription());
 
         TextView normalPrice = view.findViewById(R.id.NormalPrice);
+        //gets normal price for current product
+        //and sets it to normalPrice view
         for(Product prod: MainActivity.productList)
         {
             if(prod.getName().equals(product.getName()))
@@ -74,6 +75,7 @@ public class ProductSpecialsAdapter extends BaseAdapter
         specialPrice.setText("$ " + product.getPrice());
 
         Button addToCart = view.findViewById(R.id.addToCart);
+        //on click listener for Add button
         addToCart.setOnClickListener(new View.OnClickListener()
         {
             @Override

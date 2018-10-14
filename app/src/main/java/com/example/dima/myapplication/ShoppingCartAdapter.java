@@ -53,6 +53,8 @@ public class ShoppingCartAdapter extends BaseAdapter
         float cost = Float.valueOf(product.getPrice());
         boolean discounted = false;
         String discountedPrice = "";
+        //checks if current product on special and
+        //save its discounted price
         for(Product prod: MainActivity.specialsList)
         {
             if(prod.getName().equals(product.getName()))
@@ -68,6 +70,7 @@ public class ShoppingCartAdapter extends BaseAdapter
         name.setText(product.getName());
 
         TextView price = view.findViewById(R.id.price);
+        //sets price depending if product on special or not
         if(discounted)
         {
             price.setText("$ " + discountedPrice);
@@ -94,6 +97,7 @@ public class ShoppingCartAdapter extends BaseAdapter
 
             }
 
+            //takes user input and updates ShoppingCart list view
             @Override
             public void afterTextChanged(Editable s) {
                 if(!s.toString().isEmpty())
@@ -106,14 +110,12 @@ public class ShoppingCartAdapter extends BaseAdapter
                         shoppingCart.changeProductQuantity(position, Integer.parseInt(s.toString()));
                         ShoppingCartActivity.Update();
                     }
-                }else
-                {
-                    RemoveItem(position);
                 }
             }
         });
 
         Button remove = view.findViewById(R.id.remove_btn);
+        //on click listener for Remove button
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

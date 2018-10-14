@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +25,8 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="Log in">
+            android:label="Log in"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".LoginActivity" />
 
@@ -32,7 +35,8 @@
         </activity>
         <activity
             android:name=".ShoppingCartActivity"
-            android:label="Shopping Cart">
+            android:label="Shopping Cart"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".ShoppingCartActivity" />
 
@@ -41,9 +45,30 @@
         </activity>
         <activity
             android:name=".ShopOnline"
-            android:label="ShopOnline">
+            android:label="Shop Online"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name=".ShopOnline" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CreditCardActivity"
+            android:label="Credit Card Payment"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name=".CreditCardActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PayPallActivity"
+            android:label="PayPal Payment"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name=".PayPallActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

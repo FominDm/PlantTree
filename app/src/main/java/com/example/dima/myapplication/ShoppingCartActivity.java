@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ShoppingCartActivity extends AppCompatActivity
 {
@@ -34,6 +35,37 @@ public class ShoppingCartActivity extends AppCompatActivity
         onClick();
     }
 
+    //on click listener from CreditCard button
+    public void CreditCard(View view)
+    {
+        if(MainActivity.shoppingCart.getSize()>0)
+        {
+            Intent intent = new Intent(".CreditCardActivity");
+            intent.putExtra("totalPrice", totalPrice);
+            startActivity(intent);
+        }else
+        {
+            Toast.makeText(ShoppingCartActivity.this,"Nothing to buy...", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //on click listener for PayPal button
+    public void PayPal(View view)
+    {
+        if(MainActivity.shoppingCart.getSize() > 0)
+        {
+            Intent intent = new Intent(".PayPallActivity");
+            intent.putExtra("totalPrice", totalPrice);
+            startActivity(intent);
+        }else
+        {
+            Toast.makeText(ShoppingCartActivity.this,"Nothing to buy...", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //on click listeners for Home and Shopping buttons
     public void onClick()
     {
         homeButton = findViewById(R.id.homeButton);
@@ -56,12 +88,15 @@ public class ShoppingCartActivity extends AppCompatActivity
         });
     }
 
+    //Updates shoppingCart list view
     public static void Update()
     {
         listView.setAdapter(adapter);
         Total();
     }
 
+    //calculates total price and total savings
+    //and sets them to related fields
     private static void Total()
     {
         int quantity;
